@@ -54,6 +54,74 @@
                 </button>
             </div>
         </section>
+        <!-- Galería de Trabajos Anteriores -->
+        <section class="galeria-trabajos">
+            <h2>✨ Trabajos Anteriores ✨</h2>
+            <p class="galeria-descripcion">Mira algunos de nuestros diseños personalizados</p>
+            
+            <div class="galeria-grid">
+        <div class="galeria-item" onclick="abrirImagen('images/tenis1.jpeg')">
+            <img src="images/tenis1.jpeg" alt="Trabajo 1">
+            <div class="galeria-overlay">
+                <span>👁️ Ver más</span>
+            </div>
+        </div>
+        <div class="galeria-item" onclick="abrirImagen('images/tenis2.jpeg')">
+            <img src="images/tenis2.jpeg" alt="Trabajo 2">
+            <div class="galeria-overlay">
+                <span>👁️ Ver más</span>
+            </div>
+        </div>
+        <div class="galeria-item" onclick="abrirImagen('images/tenis3.jpeg')">
+            <img src="images/tenis3.jpeg" alt="Trabajo 3">
+            <div class="galeria-overlay">
+                <span>👁️ Ver más</span>
+            </div>
+        </div>
+        <div class="galeria-item" onclick="abrirImagen('images/tenis4.jpeg')">
+            <img src="images/tenis4.jpeg" alt="Trabajo 4">
+            <div class="galeria-overlay">
+            <span>👁️ Ver más</span>
+            </div>
+        </div>
+        <div class="galeria-item" onclick="abrirImagen('images/tenis5.jpeg')">
+            <img src="images/tenis5.jpeg" alt="Trabajo 5">
+            <div class="galeria-overlay">
+                <span>👁️ Ver más</span>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- Modal para ver imagen ampliada -->
+        <div id="modal-imagen" class="modal-imagen" onclick="cerrarImagen()">
+            <span class="cerrar-modal">&times;</span>
+            <img class="modal-contenido" id="imagen-ampliada">
+        </div>
+
+        <!-- Sección de Contacto -->
+        <section class="contacto-section">
+            <h2>💬 Contáctanos</h2>
+            <p>¿Listo para tus tenis personalizados?</p>
+            
+            <div class="contacto-grid">
+                <a href="https://wa.me/573136915958" target="_blank" class="contacto-btn whatsapp"></a>
+                    <span class="icono">📱</span>
+                    <div>
+                        <strong>WhatsApp</strong>
+                        <p>Chatea con nosotros</p>
+                    </div>
+                </a>
+                
+                <a href="https://instagram.com/krystal_style1" target="_blank" class="contacto-btn instagram"></a>
+                    <span class="icono">📷</span>
+                    <div>
+                        <strong>Instagram</strong>
+                        <p>@krystal_style1</p>
+                    </div>
+                </a>
+            </div>
+        </section>
     </main>
 
     <script src="js/app.js"></script>

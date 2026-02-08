@@ -134,3 +134,23 @@ function mostrarResumen() {
 
 // Iniciar cuando la página cargue
 window.addEventListener('DOMContentLoaded', inicializar);
+
+// ========== FUNCIONES PARA LA GALERÍA ==========
+function abrirImagen(src) {
+    const modal = document.getElementById('modal-imagen');
+    const imagenAmpliada = document.getElementById('imagen-ampliada');
+    modal.style.display = 'block';
+    imagenAmpliada.src = src;
+}
+
+function cerrarImagen() {
+    const modal = document.getElementById('modal-imagen');
+    modal.style.display = 'none';
+}
+
+// Cerrar modal con tecla ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        cerrarImagen();
+    }
+});
