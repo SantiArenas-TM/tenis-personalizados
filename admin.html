@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Krystal Style</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+        }
+
+        .admin-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+        }
+
+        .admin-section h2 {
+            color: #ff1493;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ffb6c1;
+            padding-bottom: 10px;
+        }
+
+        .form-grupo {
+            margin-bottom: 15px;
+        }
+
+        .form-grupo label {
+            display: block;
+            color: #ff69b4;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-grupo input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ffb6c1;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .btn-admin {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-admin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .btn-eliminar {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .lista-items {
+            margin-top: 20px;
+        }
+
+        .item-lista {
+            background: #fff5fb;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ffb6c1;
+        }
+
+        .volver-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .volver-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>🔧 Panel de Administración</h1>
+            <p>Gestiona los productos de Krystal Style</p>
+            <a href="index.html" class="volver-btn">← Volver a la página principal</a>
+        </div>
+
+        <!-- Sección: Modelos de Tenis -->
+        <div class="admin-section">
+            <h2>📦 Modelos de Tenis</h2>
+            <div class="form-grupo">
+                <label>Nombre del Modelo:</label>
+                <input type="text" id="nuevo-modelo" placeholder="Ej: Converse Blancos">
+            </div>
+            <button class="btn-admin" onclick="agregarModelo()">➕ Agregar Modelo</button>
+            
+            <div class="lista-items" id="lista-modelos"></div>
+        </div>
+
+        <!-- Sección: Colores de Perlas -->
+        <div class="admin-section">
+            <h2>💎 Colores de Perlas</h2>
+            <div class="form-grupo">
+                <label>Nombre del Color:</label>
+                <input type="text" id="nuevo-color-nombre" placeholder="Ej: Verde">
+            </div>
+            <div class="form-grupo">
+                <label>Código de Color (Hexadecimal):</label>
+                <input type="color" id="nuevo-color-codigo" value="#00ff00">
+            </div>
+            <button class="btn-admin" onclick="agregarColorPerla()">➕ Agregar Color</button>
+            
+            <div class="lista-items" id="lista-colores"></div>
+        </div>
+
+        <!-- Sección: Diseños -->
+        <div class="admin-section">
+            <h2>🎨 Diseños Disponibles</h2>
+            <div class="form-grupo">
+                <label>Nombre del Diseño:</label>
+                <input type="text" id="nuevo-diseno-nombre" placeholder="Ej: Arcoíris">
+            </div>
+            <div class="form-grupo">
+                <label>Descripción:</label>
+                <input type="text" id="nuevo-diseno-desc" placeholder="Ej: Diseño colorido con arcoíris">
+            </div>
+            <button class="btn-admin" onclick="agregarDiseno()">➕ Agregar Diseño</button>
+            
+            <div class="lista-items" id="lista-disenos"></div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

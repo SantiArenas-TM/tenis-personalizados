@@ -1,10 +1,10 @@
-// Datos de los productos
-const modelosTenis = [
-    { id: 1, nombre: "Air Nike Blancos", precio: 0 },
-    { id: 2, nombre: "Vans en Bota Blancos", precio: 0 }
+// Cargar datos del localStorage o usar datos por defecto
+let modelosTenis = JSON.parse(localStorage.getItem('modelosTenis')) || [
+    { id: 1, nombre: "Air Nike Blancos" },
+    { id: 2, nombre: "Vans en Bota Blancos" }
 ];
 
-const coloresPerlas = [
+let coloresPerlas = JSON.parse(localStorage.getItem('coloresPerlas')) || [
     { id: 1, nombre: "Blanco", color: "#ffffff" },
     { id: 2, nombre: "Rosa", color: "#ffb6c1" },
     { id: 3, nombre: "Azul", color: "#87ceeb" },
@@ -12,7 +12,7 @@ const coloresPerlas = [
     { id: 5, nombre: "Plateado", color: "#c0c0c0" }
 ];
 
-const disenosDisponibles = [
+let disenosDisponibles = JSON.parse(localStorage.getItem('disenosDisponibles')) || [
     { id: 1, nombre: "Flores", descripcion: "Diseño floral delicado" },
     { id: 2, nombre: "Estrellas", descripcion: "Estrellas brillantes" },
     { id: 3, nombre: "Corazones", descripcion: "Corazones románticos" },
