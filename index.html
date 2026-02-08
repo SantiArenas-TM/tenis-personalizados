@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenis Personalizados ✨</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <img src="images/logo_Krystal_Style.jpeg" alt="Logo Krystal Style" class="logo">
+        <h1>✨ Tenis Personalizados ✨</h1>
+        <p>Crea tus tenis únicos con diseños especiales</p>
+    </header>
+
+    <main>
+        <section class="personalizador">
+            <h2>Personaliza tus Tenis</h2>
+            
+            <!-- Aquí irá el selector de modelo -->
+            <div class="selector-modelo">
+                <h3>1. Elige tu modelo:</h3>
+            </div>
+
+            <!-- Aquí irá el selector de perlas -->
+            <div class="selector-perlas">
+                <h3>2. Elige el color de las perlas:</h3>
+            </div>
+
+            <!-- Aquí irá el selector de diseños -->
+            <div class="selector-disenos">
+                <h3>3. Elige tu diseño:</h3>
+            </div>
+
+            <!-- Resumen de selección -->
+            <div class="resumen-seleccion" id="resumen">
+                <h3>Tu Selección:</h3>
+                <div class="resumen-contenido">
+                    <div class="item-resumen">
+                        <strong>Modelo:</strong>
+                        <span id="resumen-modelo">No seleccionado</span>
+                    </div>
+                    <div class="item-resumen">
+                        <strong>Color de Perlas:</strong>
+                        <span id="resumen-perla">No seleccionado</span>
+                    </div>
+                    <div class="item-resumen">
+                        <strong>Diseño:</strong>
+                        <span id="resumen-diseno">No seleccionado</span>
+                    </div>
+                </div>
+                <button id="btn-enviar-pedido" class="btn-pedido" onclick="enviarPedido()" disabled>
+                    Enviar Pedido
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
