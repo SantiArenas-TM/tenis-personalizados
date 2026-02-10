@@ -21,23 +21,35 @@
             <div class="vista-previa">
                 <h3>👟 Vista Previa</h3>
                 <div class="preview-container">
-                    <div class="tenis-preview" id="tenis-preview">
-                        <div class="tenis-base">
-                            <div class="tenis-modelo" id="preview-modelo">
-                                <span>Selecciona un modelo</span>
+            <div class="tenis-preview-realista">
+                <div class="canvas-tenis" id="canvas-tenis">
+                        <!-- Imagen base del tenis -->
+                        <img src="" alt="Tenis base" id="tenis-base-img" class="tenis-base-img oculto">
+                
+                    <!-- Capa de perlas -->
+                    <div class="capa-perlas" id="capa-perlas"></div>
+                
+                        <!-- Capa de diseño -->
+                        <div class="capa-diseno" id="capa-diseno"></div>
+                
+                            <!-- Mensaje inicial -->
+                            <div class="mensaje-inicial" id="mensaje-inicial">
+                                <p>👟 Selecciona un modelo para comenzar</p>
                             </div>
-                            <div class="tenis-perlas" id="preview-perlas"></div>
-                            <div class="tenis-diseno" id="preview-diseno"></div>
                         </div>
                     </div>
+        
                     <div class="preview-info">
+                        <h4>🎨 Tu Diseño Personalizado</h4>
                         <p><strong>Modelo:</strong> <span id="info-modelo">No seleccionado</span></p>
                         <p><strong>Perlas:</strong> <span id="info-perla">No seleccionado</span></p>
                         <p><strong>Diseño:</strong> <span id="info-diseno">No seleccionado</span></p>
+                        <div class="nota-preview">
+                            <small>💡 Selecciona cada opción para ver tu diseño en tiempo real</small>
+                        </div>
                     </div>
                 </div>
             </div>
-            
             <!-- Aquí irá el selector de modelo -->
             <div class="selector-modelo">
                 <h3>1. Elige tu modelo:</h3>

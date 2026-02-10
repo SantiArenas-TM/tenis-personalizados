@@ -164,32 +164,50 @@ function seleccionarDiseno(id) {
     actualizarBotonPedido();
 }
 
-// Función para actualizar la vista previa
+// Función para actualizar la vista previa realista
 function actualizarVistaPrevia() {
-    const previewModelo = document.getElementById('preview-modelo');
-    const previewPerlas = document.getElementById('preview-perlas');
-    const previewDiseno = document.getElementById('preview-diseno');
+    const tenisBaseImg = document.getElementById('tenis-base-img');
+    const capaPerlas = document.getElementById('capa-perlas');
+    const capaDiseno = document.getElementById('capa-diseno');
+    const mensajeInicial = document.getElementById('mensaje-inicial');
     
-    // Actualizar modelo
+    // Actualizar modelo (imagen base)
     if (seleccion.modelo) {
-        previewModelo.innerHTML = '';
-        const clase = seleccion.modelo.nombre.toLowerCase().includes('nike') ? 'nike' : 'vans';
-        previewModelo.className = `tenis-modelo ${clase}`;
+        mensajeInicial.classList.add('oculto');
+        
+        // Determinar qué imagen usar (fotos reales)
+        let imagenBase;
+        const nombreModelo = seleccion.modelo.nombre.toLowerCase();
+
+        if (nombreModelo.includes('nike') || nombreModelo.includes('air')) {
+            imagenBase = 'images/tenis2.jpeg';
+        } else if (nombreModelo.includes('vans') || nombreModelo.includes('bota')) {
+            imagenBase = 'images/tenis1.jpeg';
+        } else {
+            // Por defecto usar Nike si no coincide
+            imagenBase = 'images/tenis2.jpeg';
+        }
+        
+        tenisBaseImg.src = imagenBase;
+        tenisBaseImg.classList.remove('oculto');
+        tenisBaseImg.classList.add('visible');
+        
         document.getElementById('info-modelo').textContent = seleccion.modelo.nombre;
     }
     
     // Actualizar perlas
     if (seleccion.colorPerla) {
-        previewPerlas.innerHTML = '';
-        previewPerlas.classList.add('visible');
-        // Crear múltiples perlas
-        for (let i = 0; i < 20; i++) {
+        capaPerlas.innerHTML = '';
+        
+        // Crear patrón de perlas (40 perlas distribuidas)
+        for (let i = 0; i < 40; i++) {
             const perla = document.createElement('div');
-            perla.className = 'perla';
+            perla.className = 'perla-decoracion';
             perla.style.backgroundColor = seleccion.colorPerla.color;
-            perla.style.animationDelay = `${i * 0.05}s`;
-            previewPerlas.appendChild(perla);
+            perla.style.animationDelay = `${i * 0.03}s`;
+            capaPerlas.appendChild(perla);
         }
+        
         document.getElementById('info-perla').textContent = seleccion.colorPerla.nombre;
     }
     
@@ -202,8 +220,9 @@ function actualizarVistaPrevia() {
             'Mariposas': '🦋'
         };
         const emoji = emojis[seleccion.diseno.nombre] || '✨';
-        previewDiseno.textContent = emoji;
-        previewDiseno.classList.add('visible');
+        capaDiseno.textContent = emoji;
+        capaDiseno.classList.add('visible');
+        
         document.getElementById('info-diseno').textContent = seleccion.diseno.nombre;
     }
 }
