@@ -92,24 +92,120 @@ function cargarDisenos() {
     contenedor.appendChild(divOpciones);
 }
 
-// Funciones de selección
-// Funciones de selección
+// Funciones de selección con animaciones y vista previa
 function seleccionarModelo(id) {
+    // Remover selección anterior
+    document.querySelectorAll('.selector-modelo .tarjeta-opcion').forEach(tarjeta => {
+        tarjeta.classList.remove('seleccionada');
+    });
+    
+    // Agregar animación y selección
+    const tarjetas = document.querySelectorAll('.selector-modelo .tarjeta-opcion');
+    const tarjetaSeleccionada = tarjetas[id - 1];
+    tarjetaSeleccionada.classList.add('clicked');
+    setTimeout(() => {
+        tarjetaSeleccionada.classList.remove('clicked');
+        tarjetaSeleccionada.classList.add('seleccionada');
+    }, 150);
+    
     seleccion.modelo = modelosTenis.find(m => m.id === id);
     document.getElementById('resumen-modelo').textContent = seleccion.modelo.nombre;
+    
+    // Actualizar vista previa
+    actualizarVistaPrevia();
     actualizarBotonPedido();
 }
 
 function seleccionarPerla(id) {
+    // Remover selección anterior
+    document.querySelectorAll('.selector-perlas .tarjeta-opcion').forEach(tarjeta => {
+        tarjeta.classList.remove('seleccionada');
+    });
+    
+    // Agregar animación y selección
+    const index = coloresPerlas.findIndex(c => c.id === id);
+    const tarjetas = document.querySelectorAll('.selector-perlas .tarjeta-opcion');
+    const tarjetaSeleccionada = tarjetas[index];
+    tarjetaSeleccionada.classList.add('clicked');
+    setTimeout(() => {
+        tarjetaSeleccionada.classList.remove('clicked');
+        tarjetaSeleccionada.classList.add('seleccionada');
+    }, 150);
+    
     seleccion.colorPerla = coloresPerlas.find(c => c.id === id);
     document.getElementById('resumen-perla').textContent = seleccion.colorPerla.nombre;
+    
+    // Actualizar vista previa
+    actualizarVistaPrevia();
     actualizarBotonPedido();
 }
 
 function seleccionarDiseno(id) {
+    // Remover selección anterior
+    document.querySelectorAll('.selector-disenos .tarjeta-opcion').forEach(tarjeta => {
+        tarjeta.classList.remove('seleccionada');
+    });
+    
+    // Agregar animación y selección
+    const index = disenosDisponibles.findIndex(d => d.id === id);
+    const tarjetas = document.querySelectorAll('.selector-disenos .tarjeta-opcion');
+    const tarjetaSeleccionada = tarjetas[index];
+    tarjetaSeleccionada.classList.add('clicked');
+    setTimeout(() => {
+        tarjetaSeleccionada.classList.remove('clicked');
+        tarjetaSeleccionada.classList.add('seleccionada');
+    }, 150);
+    
     seleccion.diseno = disenosDisponibles.find(d => d.id === id);
     document.getElementById('resumen-diseno').textContent = seleccion.diseno.nombre;
+    
+    // Actualizar vista previa
+    actualizarVistaPrevia();
     actualizarBotonPedido();
+}
+
+// Función para actualizar la vista previa
+function actualizarVistaPrevia() {
+    const previewModelo = document.getElementById('preview-modelo');
+    const previewPerlas = document.getElementById('preview-perlas');
+    const previewDiseno = document.getElementById('preview-diseno');
+    
+    // Actualizar modelo
+    if (seleccion.modelo) {
+        previewModelo.innerHTML = '';
+        const clase = seleccion.modelo.nombre.toLowerCase().includes('nike') ? 'nike' : 'vans';
+        previewModelo.className = `tenis-modelo ${clase}`;
+        document.getElementById('info-modelo').textContent = seleccion.modelo.nombre;
+    }
+    
+    // Actualizar perlas
+    if (seleccion.colorPerla) {
+        previewPerlas.innerHTML = '';
+        previewPerlas.classList.add('visible');
+        // Crear múltiples perlas
+        for (let i = 0; i < 20; i++) {
+            const perla = document.createElement('div');
+            perla.className = 'perla';
+            perla.style.backgroundColor = seleccion.colorPerla.color;
+            perla.style.animationDelay = `${i * 0.05}s`;
+            previewPerlas.appendChild(perla);
+        }
+        document.getElementById('info-perla').textContent = seleccion.colorPerla.nombre;
+    }
+    
+    // Actualizar diseño
+    if (seleccion.diseno) {
+        const emojis = {
+            'Flores': '🌸',
+            'Estrellas': '⭐',
+            'Corazones': '💖',
+            'Mariposas': '🦋'
+        };
+        const emoji = emojis[seleccion.diseno.nombre] || '✨';
+        previewDiseno.textContent = emoji;
+        previewDiseno.classList.add('visible');
+        document.getElementById('info-diseno').textContent = seleccion.diseno.nombre;
+    }
 }
 
 // Actualizar estado del botón de pedido
