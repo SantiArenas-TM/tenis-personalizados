@@ -1,7 +1,7 @@
 // Cargar datos del localStorage o usar datos por defecto
 let modelosTenis = JSON.parse(localStorage.getItem('modelosTenis')) || [
     { id: 1, nombre: "Air Nike Blancos" },
-    { id: 2, nombre: "Vans en Bota Blancos" }
+    { id: 2, nombre: "Converse Venus en Bota Blancos" }
 ];
 
 let coloresPerlas = JSON.parse(localStorage.getItem('coloresPerlas')) || [

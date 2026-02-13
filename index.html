@@ -92,44 +92,59 @@
             <h2>✨ Trabajos Anteriores ✨</h2>
             <p class="galeria-descripcion">Mira algunos de nuestros diseños personalizados</p>
             
+            <!-- Filtros de categoría -->
+            <div class="galeria-filtros">
+                <button class="filtro-btn activo" onclick="filtrarGaleria('todos')">Todos</button>
+                <button class="filtro-btn" onclick="filtrarGaleria('nike')">Nike Air</button>
+                <button class="filtro-btn" onclick="filtrarGaleria('vans')">Converse Venus</button>
+            </div>
+
             <div class="galeria-grid">
-        <div class="galeria-item" onclick="abrirImagen('images/tenis1.jpeg')">
-            <img src="images/tenis1.jpeg" alt="Trabajo 1">
-            <div class="galeria-overlay">
-                <span>👁️ Ver más</span>
+                <div class="galeria-item" data-categoria="nike" onclick="abrirImagen('images/tenis2.jpeg', 'Nike Air - Diseño 1')">
+                    <img src="images/tenis2.jpeg" alt="Nike Air Diseño 1">
+                    <div class="galeria-overlay">
+                        <span>👁️ Ver más</span>
+                        <small>Nike Air</small>
+                    </div>
+                </div>
+                <div class="galeria-item" data-categoria="nike" onclick="abrirImagen('images/tenis3.jpeg', 'Nike Air - Diseño 2')">
+                    <img src="images/tenis3.jpeg" alt="Nike Air Diseño 2">
+                    <div class="galeria-overlay">
+                        <span>👁️ Ver más</span>
+                        <small>Nike Air</small>
+                    </div>
+                </div>
+                <div class="galeria-item" data-categoria="nike" onclick="abrirImagen('images/tenis4.jpeg', 'Nike Air - Diseño 3')">
+                    <img src="images/tenis4.jpeg" alt="Nike Air Diseño 3">
+                    <div class="galeria-overlay">
+                        <span>👁️ Ver más</span>
+                        <small>Nike Air</small>
+                    </div>
+                </div>
+                <div class="galeria-item" data-categoria="vans" onclick="abrirImagen('images/tenis1.jpeg', 'Converse Venus en Bota - Diseño 1')">
+                    <img src="images/tenis1.jpeg" alt="Converse Venus en Bota - Diseño 1">
+                    <div class="galeria-overlay">
+                        <span>👁️ Ver más</span>
+                        <small>Converse Venus en Bota</small>
+                    </div>
+                </div>
+                <div class="galeria-item" data-categoria="vans" onclick="abrirImagen('images/tenis5.jpeg', 'Converse Venus en Bota - Diseño 2')">
+                    <img src="images/tenis5.jpeg" alt="Converse Venus en Bota - Diseño 2">
+                    <div class="galeria-overlay">
+                        <span>👁️ Ver más</span>
+                        <small>Converse Venus en Bota</small>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="galeria-item" onclick="abrirImagen('images/tenis2.jpeg')">
-            <img src="images/tenis2.jpeg" alt="Trabajo 2">
-            <div class="galeria-overlay">
-                <span>👁️ Ver más</span>
-            </div>
-        </div>
-        <div class="galeria-item" onclick="abrirImagen('images/tenis3.jpeg')">
-            <img src="images/tenis3.jpeg" alt="Trabajo 3">
-            <div class="galeria-overlay">
-                <span>👁️ Ver más</span>
-            </div>
-        </div>
-        <div class="galeria-item" onclick="abrirImagen('images/tenis4.jpeg')">
-            <img src="images/tenis4.jpeg" alt="Trabajo 4">
-            <div class="galeria-overlay">
-            <span>👁️ Ver más</span>
-            </div>
-        </div>
-        <div class="galeria-item" onclick="abrirImagen('images/tenis5.jpeg')">
-            <img src="images/tenis5.jpeg" alt="Trabajo 5">
-            <div class="galeria-overlay">
-                <span>👁️ Ver más</span>
-            </div>
-        </div>
-    </div>
         </section>
 
         <!-- Modal para ver imagen ampliada -->
         <div id="modal-imagen" class="modal-imagen" onclick="cerrarImagen()">
             <span class="cerrar-modal">&times;</span>
-            <img class="modal-contenido" id="imagen-ampliada">
+            <div class="modal-contenedor">
+                <img class="modal-contenido" id="imagen-ampliada">
+                <p class="modal-titulo" id="modal-titulo"></p>
+            </div>
         </div>
 
         <!-- Sección de Contacto -->

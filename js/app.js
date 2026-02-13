@@ -1,7 +1,7 @@
 // Cargar datos del localStorage o usar datos por defecto
 let modelosTenis = JSON.parse(localStorage.getItem('modelosTenis')) || [
     { id: 1, nombre: "Air Nike Blancos" },
-    { id: 2, nombre: "Vans en Bota Blancos" }
+    { id: 2, nombre: "Converse Venus en Bota Blancos" }
 ];
 
 let coloresPerlas = JSON.parse(localStorage.getItem('coloresPerlas')) || [
@@ -181,9 +181,8 @@ function actualizarVistaPrevia() {
 
         if (nombreModelo.includes('nike') || nombreModelo.includes('air')) {
             imagenBase = 'images/tenis2.jpeg';
-        } else if (nombreModelo.includes('vans') || nombreModelo.includes('bota')) {
-            imagenBase = 'images/tenis1.jpeg';
-        } else {
+        } else if (nombreModelo.includes('converse') || nombreModelo.includes('venus') || nombreModelo.includes('bota')) {
+        }else {
             // Por defecto usar Nike si no coincide
             imagenBase = 'images/tenis2.jpeg';
         }
@@ -251,17 +250,50 @@ function mostrarResumen() {
 window.addEventListener('DOMContentLoaded', inicializar);
 
 // ========== FUNCIONES PARA LA GALERÍA ==========
-function abrirImagen(src) {
+// ========== GALERÍA MEJORADA ==========
+function abrirImagen(src, titulo) {
     const modal = document.getElementById('modal-imagen');
     const imagenAmpliada = document.getElementById('imagen-ampliada');
+    const modalTitulo = document.getElementById('modal-titulo');
     modal.style.display = 'block';
     imagenAmpliada.src = src;
+    if (titulo) modalTitulo.textContent = titulo;
+    document.body.style.overflow = 'hidden';
 }
 
 function cerrarImagen() {
     const modal = document.getElementById('modal-imagen');
     modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
+
+function filtrarGaleria(categoria) {
+    // Actualizar botones
+    document.querySelectorAll('.filtro-btn').forEach(btn => {
+        btn.classList.remove('activo');
+    });
+    event.target.classList.add('activo');
+
+    // Filtrar imágenes
+    document.querySelectorAll('.galeria-item').forEach(item => {
+        if (categoria === 'todos') {
+            item.classList.remove('oculto');
+        } else {
+            if (item.dataset.categoria === categoria) {
+                item.classList.remove('oculto');
+            } else {
+                item.classList.add('oculto');
+            }
+        }
+    });
+}
+
+// Cerrar modal con tecla ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        cerrarImagen();
+    }
+});
 
 // Cerrar modal con tecla ESC
 document.addEventListener('keydown', function(event) {

@@ -20,6 +20,10 @@ header {
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(255, 182, 193, 0.3);
     margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     /* Logo */
 .logo {
     width: 150px;
@@ -746,4 +750,215 @@ main {
     color: #ff69b4;
     font-size: 0.9em;
     line-height: 1.5;
+}
+
+/* ========== DISEÑO MOBILE (RESPONSIVE) ========== */
+@media (max-width: 768px) {
+    /* Header */
+    header {
+        padding: 20px 15px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    header p {
+        font-size: 1em;
+    }
+
+    .logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* Personalizador */
+    .personalizador {
+        padding: 20px 15px;
+    }
+
+    .personalizador h2 {
+        font-size: 1.5em;
+    }
+
+    .personalizador h3 {
+        font-size: 1.2em;
+    }
+
+    /* Opciones grid */
+    .opciones-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .tarjeta-opcion {
+        padding: 15px 10px;
+    }
+
+    .tarjeta-opcion h4 {
+        font-size: 1em;
+    }
+
+    .tarjeta-opcion button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    /* Vista previa */
+    .preview-container {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-info {
+        position: static;
+    }
+
+    /* Galería */
+    .galeria-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .galeria-item img {
+        height: 200px;
+    }
+
+    .galeria-trabajos h2 {
+        font-size: 1.8em;
+    }
+
+    /* Resumen */
+    .resumen-seleccion {
+        padding: 20px 15px;
+    }
+
+    .item-resumen {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    /* Contacto */
+    .contacto-section {
+        padding: 30px 15px;
+    }
+
+    .contacto-section h2 {
+        font-size: 1.8em;
+    }
+
+    .contacto-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Botón Admin */
+    .admin-btn-flotante {
+        bottom: 10px;
+        right: 10px;
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* ========== GALERÍA MEJORADA ========== */
+.galeria-filtros {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filtro-btn {
+    background: white;
+    color: #ff69b4;
+    border: 2px solid #ff69b4;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.filtro-btn:hover {
+    background: #ff69b4;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.filtro-btn.activo {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    border-color: #ff1493;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+.galeria-item.oculto {
+    display: none;
+}
+
+.galeria-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 20, 147, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    gap: 10px;
+}
+
+.galeria-overlay small {
+    color: white;
+    font-size: 1em;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+/* Modal mejorado */
+.modal-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 90%;
+    margin: auto;
+}
+
+.modal-titulo {
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.4em;
+    }
+
+    .opciones-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .galeria-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .galeria-item img {
+        height: 250px;
+    }
+
+    .personalizador h2 {
+        font-size: 1.3em;
+    }
 }
