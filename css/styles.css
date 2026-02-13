@@ -962,3 +962,161 @@ main {
         font-size: 1.3em;
     }
 }
+
+/* ========== MODAL DE PEDIDO ========== */
+.modal-pedido {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-pedido-contenido {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+    animation: zoomIn 0.3s ease;
+}
+
+.modal-pedido-contenido h2 {
+    color: #ff1493;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.resumen-pedido {
+    background: linear-gradient(135deg, #fff0f5, #ffe4f5);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ffb6c1;
+}
+
+.resumen-pedido h3 {
+    color: #ff1493;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.resumen-pedido p {
+    margin: 8px 0;
+    color: #555;
+}
+
+/* Filas del formulario */
+.form-fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 480px) {
+    .form-fila {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Select de talla */
+.form-pedido select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ffb6c1;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    background: white;
+    cursor: pointer;
+    color: #333;
+}
+
+.form-pedido select:focus {
+    outline: none;
+    border-color: #ff1493;
+}
+
+.form-pedido .form-grupo {
+    margin-bottom: 15px;
+}
+
+.form-pedido label {
+    display: block;
+    color: #ff69b4;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-pedido input,
+.form-pedido textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ffb6c1;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-pedido input:focus,
+.form-pedido textarea:focus {
+    outline: none;
+    border-color: #ff1493;
+}
+
+.form-pedido textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.modal-pedido-botones {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-cancelar {
+    flex: 1;
+    background: #f0f0f0;
+    color: #666;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-cancelar:hover {
+    background: #ddd;
+}
+
+.btn-confirmar {
+    flex: 2;
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-confirmar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}

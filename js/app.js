@@ -1,23 +1,5 @@
-// Cargar datos del localStorage o usar datos por defecto
-let modelosTenis = JSON.parse(localStorage.getItem('modelosTenis')) || [
-    { id: 1, nombre: "Air Nike Blancos" },
-    { id: 2, nombre: "Converse Venus en Bota Blancos" }
-];
-
-let coloresPerlas = JSON.parse(localStorage.getItem('coloresPerlas')) || [
-    { id: 1, nombre: "Blanco", color: "#ffffff" },
-    { id: 2, nombre: "Rosa", color: "#ffb6c1" },
-    { id: 3, nombre: "Azul", color: "#87ceeb" },
-    { id: 4, nombre: "Dorado", color: "#ffd700" },
-    { id: 5, nombre: "Plateado", color: "#c0c0c0" }
-];
-
-let disenosDisponibles = JSON.parse(localStorage.getItem('disenosDisponibles')) || [
-    { id: 1, nombre: "Flores", descripcion: "Diseño floral delicado" },
-    { id: 2, nombre: "Estrellas", descripcion: "Estrellas brillantes" },
-    { id: 3, nombre: "Corazones", descripcion: "Corazones románticos" },
-    { id: 4, nombre: "Mariposas", descripcion: "Mariposas coloridas" }
-];
+// URL del servidor backend
+const API_URL = 'http://localhost:5000/api';
 
 // Variables para guardar la selección del usuario
 let seleccion = {
@@ -26,19 +8,47 @@ let seleccion = {
     diseno: null
 };
 
-// Función para inicializar la página
-function inicializar() {
-    cargarModelos();
-    cargarColoresPerlas();
-    cargarDisenos();
+// Variables globales de datos
+let modelosTenis = [];
+let coloresPerlas = [];
+let disenosDisponibles = [];
+
+// ========== CARGAR DATOS DESDE EL BACKEND ==========
+async function cargarDatosDesdeAPI() {
+    try {
+        // Cargar los 3 datos al mismo tiempo
+        const [modelosRes, coloresRes, disenosRes] = await Promise.all([
+            fetch(`${API_URL}/modelos`),
+            fetch(`${API_URL}/colores`),
+            fetch(`${API_URL}/disenos`)
+        ]);
+
+        modelosTenis = await modelosRes.json();
+        coloresPerlas = await coloresRes.json();
+        disenosDisponibles = await disenosRes.json();
+
+        // Renderizar todo
+        cargarModelos();
+        cargarColoresPerlas();
+        cargarDisenos();
+
+    } catch (error) {
+        console.error('Error conectando con el servidor:', error);
+        alert('⚠️ No se pudo conectar con el servidor. Asegúrate de que está corriendo.');
+    }
 }
 
-// Cargar los modelos de tenis
+// ========== CARGAR OPCIONES EN PANTALLA ==========
 function cargarModelos() {
     const contenedor = document.querySelector('.selector-modelo');
-    const divOpciones = document.createElement('div');
-    divOpciones.className = 'opciones-grid';
-    
+    let divOpciones = contenedor.querySelector('.opciones-grid');
+    if (!divOpciones) {
+        divOpciones = document.createElement('div');
+        divOpciones.className = 'opciones-grid';
+        contenedor.appendChild(divOpciones);
+    }
+    divOpciones.innerHTML = '';
+
     modelosTenis.forEach(modelo => {
         const tarjeta = document.createElement('div');
         tarjeta.className = 'tarjeta-opcion';
@@ -48,16 +58,18 @@ function cargarModelos() {
         `;
         divOpciones.appendChild(tarjeta);
     });
-    
-    contenedor.appendChild(divOpciones);
 }
 
-// Cargar colores de perlas
 function cargarColoresPerlas() {
     const contenedor = document.querySelector('.selector-perlas');
-    const divOpciones = document.createElement('div');
-    divOpciones.className = 'opciones-grid';
-    
+    let divOpciones = contenedor.querySelector('.opciones-grid');
+    if (!divOpciones) {
+        divOpciones = document.createElement('div');
+        divOpciones.className = 'opciones-grid';
+        contenedor.appendChild(divOpciones);
+    }
+    divOpciones.innerHTML = '';
+
     coloresPerlas.forEach(perla => {
         const tarjeta = document.createElement('div');
         tarjeta.className = 'tarjeta-opcion';
@@ -68,16 +80,18 @@ function cargarColoresPerlas() {
         `;
         divOpciones.appendChild(tarjeta);
     });
-    
-    contenedor.appendChild(divOpciones);
 }
 
-// Cargar diseños
 function cargarDisenos() {
     const contenedor = document.querySelector('.selector-disenos');
-    const divOpciones = document.createElement('div');
-    divOpciones.className = 'opciones-grid';
-    
+    let divOpciones = contenedor.querySelector('.opciones-grid');
+    if (!divOpciones) {
+        divOpciones = document.createElement('div');
+        divOpciones.className = 'opciones-grid';
+        contenedor.appendChild(divOpciones);
+    }
+    divOpciones.innerHTML = '';
+
     disenosDisponibles.forEach(diseno => {
         const tarjeta = document.createElement('div');
         tarjeta.className = 'tarjeta-opcion';
@@ -88,41 +102,34 @@ function cargarDisenos() {
         `;
         divOpciones.appendChild(tarjeta);
     });
-    
-    contenedor.appendChild(divOpciones);
 }
 
-// Funciones de selección con animaciones y vista previa
+// ========== FUNCIONES DE SELECCIÓN CON ANIMACIONES ==========
 function seleccionarModelo(id) {
-    // Remover selección anterior
     document.querySelectorAll('.selector-modelo .tarjeta-opcion').forEach(tarjeta => {
         tarjeta.classList.remove('seleccionada');
     });
-    
-    // Agregar animación y selección
+
     const tarjetas = document.querySelectorAll('.selector-modelo .tarjeta-opcion');
-    const tarjetaSeleccionada = tarjetas[id - 1];
+    const index = modelosTenis.findIndex(m => m.id === id);
+    const tarjetaSeleccionada = tarjetas[index];
     tarjetaSeleccionada.classList.add('clicked');
     setTimeout(() => {
         tarjetaSeleccionada.classList.remove('clicked');
         tarjetaSeleccionada.classList.add('seleccionada');
     }, 150);
-    
+
     seleccion.modelo = modelosTenis.find(m => m.id === id);
     document.getElementById('resumen-modelo').textContent = seleccion.modelo.nombre;
-    
-    // Actualizar vista previa
     actualizarVistaPrevia();
     actualizarBotonPedido();
 }
 
 function seleccionarPerla(id) {
-    // Remover selección anterior
     document.querySelectorAll('.selector-perlas .tarjeta-opcion').forEach(tarjeta => {
         tarjeta.classList.remove('seleccionada');
     });
-    
-    // Agregar animación y selección
+
     const index = coloresPerlas.findIndex(c => c.id === id);
     const tarjetas = document.querySelectorAll('.selector-perlas .tarjeta-opcion');
     const tarjetaSeleccionada = tarjetas[index];
@@ -131,22 +138,18 @@ function seleccionarPerla(id) {
         tarjetaSeleccionada.classList.remove('clicked');
         tarjetaSeleccionada.classList.add('seleccionada');
     }, 150);
-    
+
     seleccion.colorPerla = coloresPerlas.find(c => c.id === id);
     document.getElementById('resumen-perla').textContent = seleccion.colorPerla.nombre;
-    
-    // Actualizar vista previa
     actualizarVistaPrevia();
     actualizarBotonPedido();
 }
 
 function seleccionarDiseno(id) {
-    // Remover selección anterior
     document.querySelectorAll('.selector-disenos .tarjeta-opcion').forEach(tarjeta => {
         tarjeta.classList.remove('seleccionada');
     });
-    
-    // Agregar animación y selección
+
     const index = disenosDisponibles.findIndex(d => d.id === id);
     const tarjetas = document.querySelectorAll('.selector-disenos .tarjeta-opcion');
     const tarjetaSeleccionada = tarjetas[index];
@@ -155,50 +158,41 @@ function seleccionarDiseno(id) {
         tarjetaSeleccionada.classList.remove('clicked');
         tarjetaSeleccionada.classList.add('seleccionada');
     }, 150);
-    
+
     seleccion.diseno = disenosDisponibles.find(d => d.id === id);
     document.getElementById('resumen-diseno').textContent = seleccion.diseno.nombre;
-    
-    // Actualizar vista previa
     actualizarVistaPrevia();
     actualizarBotonPedido();
 }
 
-// Función para actualizar la vista previa realista
+// ========== VISTA PREVIA ==========
 function actualizarVistaPrevia() {
     const tenisBaseImg = document.getElementById('tenis-base-img');
     const capaPerlas = document.getElementById('capa-perlas');
     const capaDiseno = document.getElementById('capa-diseno');
     const mensajeInicial = document.getElementById('mensaje-inicial');
-    
-    // Actualizar modelo (imagen base)
+
     if (seleccion.modelo) {
         mensajeInicial.classList.add('oculto');
-        
-        // Determinar qué imagen usar (fotos reales)
-        let imagenBase;
         const nombreModelo = seleccion.modelo.nombre.toLowerCase();
+        let imagenBase;
 
         if (nombreModelo.includes('nike') || nombreModelo.includes('air')) {
             imagenBase = 'images/tenis2.jpeg';
         } else if (nombreModelo.includes('converse') || nombreModelo.includes('venus') || nombreModelo.includes('bota')) {
-        }else {
-            // Por defecto usar Nike si no coincide
+            imagenBase = 'images/tenis1.jpeg';
+        } else {
             imagenBase = 'images/tenis2.jpeg';
         }
-        
+
         tenisBaseImg.src = imagenBase;
         tenisBaseImg.classList.remove('oculto');
         tenisBaseImg.classList.add('visible');
-        
         document.getElementById('info-modelo').textContent = seleccion.modelo.nombre;
     }
-    
-    // Actualizar perlas
+
     if (seleccion.colorPerla) {
         capaPerlas.innerHTML = '';
-        
-        // Crear patrón de perlas (40 perlas distribuidas)
         for (let i = 0; i < 40; i++) {
             const perla = document.createElement('div');
             perla.className = 'perla-decoracion';
@@ -206,11 +200,9 @@ function actualizarVistaPrevia() {
             perla.style.animationDelay = `${i * 0.03}s`;
             capaPerlas.appendChild(perla);
         }
-        
         document.getElementById('info-perla').textContent = seleccion.colorPerla.nombre;
     }
-    
-    // Actualizar diseño
+
     if (seleccion.diseno) {
         const emojis = {
             'Flores': '🌸',
@@ -221,12 +213,11 @@ function actualizarVistaPrevia() {
         const emoji = emojis[seleccion.diseno.nombre] || '✨';
         capaDiseno.textContent = emoji;
         capaDiseno.classList.add('visible');
-        
         document.getElementById('info-diseno').textContent = seleccion.diseno.nombre;
     }
 }
 
-// Actualizar estado del botón de pedido
+// ========== BOTÓN DE PEDIDO ==========
 function actualizarBotonPedido() {
     const boton = document.getElementById('btn-enviar-pedido');
     if (seleccion.modelo && seleccion.colorPerla && seleccion.diseno) {
@@ -236,21 +227,98 @@ function actualizarBotonPedido() {
     }
 }
 
-// Enviar pedido
+// ========== ENVIAR PEDIDO ==========
 function enviarPedido() {
-    alert(`¡Pedido enviado!\n\nModelo: ${seleccion.modelo.nombre}\nPerlas: ${seleccion.colorPerla.nombre}\nDiseño: ${seleccion.diseno.nombre}\n\n¡Pronto nos contactaremos contigo!`);
+    // Mostrar resumen en el modal
+    document.getElementById('pedido-resumen-modelo').textContent = seleccion.modelo.nombre;
+    document.getElementById('pedido-resumen-perla').textContent = seleccion.colorPerla.nombre;
+    document.getElementById('pedido-resumen-diseno').textContent = seleccion.diseno.nombre;
+    
+    // Mostrar modal
+    document.getElementById('modal-pedido').style.display = 'flex';
 }
 
-// Mostrar resumen de selección
-function mostrarResumen() {
-    console.log("Selección actual:", seleccion);
+function cerrarModalPedido() {
+    document.getElementById('modal-pedido').style.display = 'none';
 }
 
-// Iniciar cuando la página cargue
-window.addEventListener('DOMContentLoaded', inicializar);
+async function confirmarPedido() {
+    const nombre = document.getElementById('pedido-nombre').value.trim();
+    const telefono = document.getElementById('pedido-telefono').value.trim();
+    const correo = document.getElementById('pedido-correo').value.trim();
+    const talla = document.getElementById('pedido-talla').value;
+    const pais = document.getElementById('pedido-pais').value.trim();
+    const ciudad = document.getElementById('pedido-ciudad').value.trim();
+    const barrio = document.getElementById('pedido-barrio').value.trim();
+    const direccion = document.getElementById('pedido-direccion').value.trim();
+    const mensaje = document.getElementById('pedido-mensaje').value.trim();
 
-// ========== FUNCIONES PARA LA GALERÍA ==========
-// ========== GALERÍA MEJORADA ==========
+    // Validar campos obligatorios
+    if (!nombre || !telefono || !talla || !direccion) {
+        alert('⚠️ Por favor completa los campos obligatorios:\n- Nombre\n- Teléfono\n- Talla\n- Dirección');
+        return;
+    }
+
+    const pedido = {
+        nombre_cliente: nombre,
+        telefono: telefono,
+        correo: correo,
+        talla: talla,
+        pais: pais,
+        ciudad: ciudad,
+        barrio: barrio,
+        direccion: direccion,
+        modelo: seleccion.modelo.nombre,
+        color_perla: seleccion.colorPerla.nombre,
+        diseno: seleccion.diseno.nombre,
+        mensaje: mensaje
+    };
+
+    try {
+        const response = await fetch(`${API_URL}/pedidos`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pedido)
+        });
+
+        if (response.ok) {
+            cerrarModalPedido();
+            mostrarConfirmacion(pedido);
+        }
+    } catch (error) {
+        alert('❌ Error al enviar el pedido. Verifica que el servidor esté corriendo.');
+    }
+}
+
+function mostrarConfirmacion(pedido) {
+    const mensajeWhatsApp = 
+`¡Hola Krystal Style! 👟✨
+
+Quiero hacer un pedido:
+
+👟 *Modelo:* ${pedido.modelo}
+💎 *Perlas:* ${pedido.color_perla}
+🎨 *Diseño:* ${pedido.diseno}
+📏 *Talla:* ${pedido.talla}
+
+👤 *Nombre:* ${pedido.nombre_cliente}
+📱 *Teléfono:* ${pedido.telefono}
+📧 *Correo:* ${pedido.correo || 'No especificado'}
+🌍 *País:* ${pedido.pais || 'No especificado'}
+🏙️ *Ciudad:* ${pedido.ciudad || 'No especificado'}
+🏘️ *Barrio:* ${pedido.barrio || 'No especificado'}
+🏠 *Dirección:* ${pedido.direccion}
+
+📝 *Mensaje:* ${pedido.mensaje || 'Sin mensaje adicional'}
+
+¡Gracias!`;
+
+    const urlWhatsApp = `https://wa.me/573136915958?text=${encodeURIComponent(mensajeWhatsApp)}`;
+    alert(`✅ ¡Pedido registrado exitosamente!\n\nTe redirigiremos a WhatsApp para confirmar tu pedido.`);
+    window.open(urlWhatsApp, '_blank');
+}
+
+// ========== GALERÍA ==========
 function abrirImagen(src, titulo) {
     const modal = document.getElementById('modal-imagen');
     const imagenAmpliada = document.getElementById('imagen-ampliada');
@@ -268,13 +336,11 @@ function cerrarImagen() {
 }
 
 function filtrarGaleria(categoria) {
-    // Actualizar botones
     document.querySelectorAll('.filtro-btn').forEach(btn => {
         btn.classList.remove('activo');
     });
     event.target.classList.add('activo');
 
-    // Filtrar imágenes
     document.querySelectorAll('.galeria-item').forEach(item => {
         if (categoria === 'todos') {
             item.classList.remove('oculto');
@@ -288,16 +354,13 @@ function filtrarGaleria(categoria) {
     });
 }
 
-// Cerrar modal con tecla ESC
+// Cerrar modal con ESC
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         cerrarImagen();
+        cerrarModalPedido();
     }
 });
 
-// Cerrar modal con tecla ESC
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        cerrarImagen();
-    }
-});
+// Iniciar cuando cargue la página
+window.addEventListener('DOMContentLoaded', cargarDatosDesdeAPI);

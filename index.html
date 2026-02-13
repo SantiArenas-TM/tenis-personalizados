@@ -147,6 +147,113 @@
             </div>
         </div>
 
+        <!-- Modal de Pedido -->
+        <div id="modal-pedido" class="modal-pedido">
+            <div class="modal-pedido-contenido">
+                <h2>📦 Confirmar Pedido</h2>
+                
+                <div class="resumen-pedido">
+                    <h3>Tu selección:</h3>
+                    <p>👟 <strong>Modelo:</strong> <span id="pedido-resumen-modelo"></span></p>
+                    <p>💎 <strong>Perlas:</strong> <span id="pedido-resumen-perla"></span></p>
+                    <p>🎨 <strong>Diseño:</strong> <span id="pedido-resumen-diseno"></span></p>
+                </div>
+
+               <div class="form-pedido">
+    <div class="form-fila">
+        <div class="form-grupo">
+            <label>👤 Tu nombre completo:</label>
+            <input type="text" id="pedido-nombre" placeholder="Ej: María García">
+        </div>
+        <div class="form-grupo">
+            <label>📱 Tu teléfono:</label>
+            <input type="text" id="pedido-telefono" placeholder="Ej: 3001234567">
+        </div>
+    </div>
+
+    <div class="form-fila">
+        <div class="form-grupo">
+            <label>📧 Correo electrónico:</label>
+            <input type="email" id="pedido-correo" placeholder="Ej: maria@gmail.com">
+        </div>
+        <div class="form-grupo">
+            <label>👟 Talla de tenis:</label>
+            <select id="pedido-talla">
+    <option value="">Selecciona tu talla</option>
+    <optgroup label="Tallas Niños">
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+        <option value="32">32</option>
+        <option value="33">33</option>
+    </optgroup>
+    <optgroup label="Tallas Jóvenes y Adultos">
+        <option value="34">34</option>
+        <option value="35">35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+        <option value="43">43</option>
+        <option value="44">44</option>
+        <option value="45">45</option>
+        <option value="46">46</option>
+        <option value="47">47</option>
+        <option value="48">48</option>
+    </optgroup>
+</select>
+        </div>
+    </div>
+
+    <div class="form-fila">
+        <div class="form-grupo">
+            <label>🌍 País:</label>
+            <input type="text" id="pedido-pais" placeholder="Ej: Colombia">
+        </div>
+        <div class="form-grupo">
+            <label>🏙️ Ciudad:</label>
+            <input type="text" id="pedido-ciudad" placeholder="Ej: Medellín">
+        </div>
+    </div>
+
+    <div class="form-fila">
+        <div class="form-grupo">
+            <label>🏘️ Barrio:</label>
+            <input type="text" id="pedido-barrio" placeholder="Ej: El Poblado">
+        </div>
+        <div class="form-grupo">
+            <label>🏠 Dirección:</label>
+            <input type="text" id="pedido-direccion" placeholder="Ej: Calle 10 # 20-30">
+        </div>
+    </div>
+
+    <div class="form-grupo">
+        <label>📝 Mensaje adicional (opcional):</label>
+        <textarea id="pedido-mensaje" placeholder="¿Algún detalle especial que quieras agregar?"></textarea>
+    </div>
+</div>
+
+                <div class="modal-pedido-botones">
+                    <button class="btn-cancelar" onclick="cerrarModalPedido()">Cancelar</button>
+                    <button class="btn-confirmar" onclick="confirmarPedido()">
+                        📱 Confirmar y enviar por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- Sección de Contacto -->
         <section class="contacto-section">
             <h2>💬 Contáctanos</h2>
